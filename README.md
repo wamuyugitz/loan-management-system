@@ -1,27 +1,77 @@
-# LoanManagementSystem
+# 🏦 Loan Management System
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.16.
+The **Loan Management System** is a **full-stack web application** that enables businesses to **manage loans, customers, and repayments** effectively. It provides an **Angular frontend** connected to a **Java Spring Boot backend with MySQL**, allowing seamless data management.
 
-## Development server
+🚀 This project was developed collaboratively:
+- **Frontend Developer:** Wamuyu Gitonga (Built with **Angular & Bootstrap**)
+- **Backend Developer:** Morgan (Built with **Spring Boot & MySQL**)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+---
 
-## Code scaffolding
+## 📜 **Features**
+### **Frontend (Angular)**
+ **User Authentication**
+   - Login & Registration (JWT-based authentication)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+ **Customer Management**
+   - Add, edit, delete customers
+   - Search & filter customers dynamically
 
-## Build
+ **Loan Issuance & Repayments**
+   - Assign loans to customers
+   - Define **amount, interest rate, repayment period, and frequency**
+   - View **automated repayment schedules**
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+ **Dashboard & Analytics**
+   - **Graphical insights** into loan distribution & repayments
+   - **Sortable & filterable tables**
+   - **Pagination for large datasets**
 
-## Running unit tests
+ **User-Friendly UI**
+   - Responsive **Angular UI with Bootstrap**
+   - **Material Design** components
+   - **Lottie Animations** for enhanced UX
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+---
 
-## Running end-to-end tests
+### **Backend (Spring Boot & MySQL)**
+ **Spring Boot REST API** for handling:
+   - **User Authentication & Authorization** (Spring Security with JWT)
+   - **Customer Management**
+   - **Loan Processing & Repayment Scheduling**
+   - **Statistical Reports & Data Fetching**
+   - **CRUD Operations with MySQL Database**
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+ **MySQL Database**
+   - Stores user, customer, and loan data persistently
+   - Optimized **SQL queries for fast transactions**
+   - **Entity Relationships:** One-to-Many (Customer to Loans)
 
-## Further help
+---
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## 🛠️ **Technologies Used**
+### **Frontend**
+-  **Angular 16+** (Component-based UI)
+-  **Angular Material + Bootstrap 5** (Styling & UI)
+-  **Lottie Animations** (Enhanced UI/UX)
+-  **Charts.js / Recharts** (Data visualization)
+
+### **Backend**
+-  **Java (Spring Boot 3+)** (Backend API)
+-  **MySQL Database** (Data Storage)
+-  **Spring Security + JWT** (Authentication)
+-  **Spring Data JPA** (Database ORM)
+-  **RESTful API with Spring MVC**
+
+---
+
+##  **Installation & Setup**
+### **1️⃣ Clone the Repository**
+```sh
+git clone https://github.com/yourusername/loan-management-system.git
+cd loan-management-system
+
+###  **Install Dependencies**
+
+### **Run the Angular App**
+- ng serve

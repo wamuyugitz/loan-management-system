@@ -1,0 +1,39 @@
+<mat-sidenav-container class="sidenav-container">
+  
+  <!-- Sidebar Navigation -->
+  <mat-sidenav #sidenav mode="side" [class.collapsed]="!isExpanded" opened class="animated-sidenav">
+    <mat-toolbar class="sidenav-header">
+      <button mat-icon-button (click)="toggleSidenav()">
+        <mat-icon>{{ isExpanded ? 'menu_open' : 'menu' }}</mat-icon>
+      </button>
+      <span *ngIf="isExpanded" class="sidenav-title">Menu</span>
+    </mat-toolbar>
+
+    <mat-nav-list class="nav-list">
+      <a mat-list-item routerLink="/dashboard" routerLinkActive="active-link">
+        <mat-icon class="nav-icon">dashboard</mat-icon>
+        <span class="nav-text" *ngIf="isExpanded">Dashboard</span>
+      </a>
+      <a mat-list-item routerLink="/customers" routerLinkActive="active-link">
+        <mat-icon class="nav-icon">people</mat-icon>
+        <span class="nav-text" *ngIf="isExpanded">Customers</span>
+      </a>
+      <a mat-list-item routerLink="/loans" routerLinkActive="active-link">
+        <mat-icon class="nav-icon">attach_money</mat-icon>
+        <span class="nav-text" *ngIf="isExpanded">Loans</span>
+      </a>
+      <a mat-list-item routerLink="/reports" routerLinkActive="active-link">
+        <mat-icon class="nav-icon">bar_chart</mat-icon>
+        <span class="nav-text" *ngIf="isExpanded">Reports</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!-- Main Content -->
+  <mat-sidenav-content>
+    <div class="content">
+      <router-outlet></router-outlet> <!-- Loads selected page -->
+    </div>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

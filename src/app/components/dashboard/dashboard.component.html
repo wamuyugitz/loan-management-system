@@ -1,0 +1,112 @@
+<div class="dashboard-container">
+  
+  <!-- Dashboard Title -->
+  <h2 class="dashboard-title">Dashboard Overview</h2>
+
+  <!-- Quick Statistics Cards -->
+  <div class="dashboard-cards">
+    <mat-card class="stat-card">
+      <mat-card-title>Total Customers</mat-card-title>
+      <mat-card-content>
+        <h3>1,234</h3>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <mat-card-title>Active Loans</mat-card-title>
+      <mat-card-content>
+        <h3>567</h3>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <mat-card-title>Paid Loans</mat-card-title>
+      <mat-card-content>
+        <h3>789</h3>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <mat-card-title>Pending Loans</mat-card-title>
+      <mat-card-content>
+        <h3>98</h3>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Loan Analytics Charts Section -->
+  <div class="dashboard-charts">
+    <h3>Loan Analytics</h3>
+    <app-charts></app-charts>
+  </div>
+
+  <!-- Recent Activity Table -->
+  <div class="recent-activity">
+    <h3>Recent Activity</h3>
+
+    <!-- White Row Above the Table for Sorting and Filtering -->
+    <div class="table-controls">
+      <!-- Show Entries Dropdown -->
+      <mat-form-field appearance="outline">
+        <mat-label>Show Entries</mat-label>
+        <mat-select [(value)]="pageSize" (selectionChange)="updatePageSize()">
+          <mat-option *ngFor="let size of [5, 10, 15, 20]" [value]="size">{{ size }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Sorting Dropdown -->
+      <mat-form-field appearance="outline">
+        <mat-label>Sort By</mat-label>
+        <mat-select [(value)]="sortColumn" (selectionChange)="applySorting()">
+          <mat-option value="customer">Customer</mat-option>
+          <mat-option value="amount">Amount</mat-option>
+          <mat-option value="status">Status</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Sorting Order -->
+      <mat-form-field appearance="outline">
+        <mat-label>Order</mat-label>
+        <mat-select [(value)]="sortDirection" (selectionChange)="applySorting()">
+          <mat-option value="asc">Ascending</mat-option>
+          <mat-option value="desc">Descending</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Search Box -->
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-label>Search</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Search values">
+      </mat-form-field>
+    </div>
+
+    <!-- Table -->
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 striped-table">
+
+      <!-- Customer Column -->
+      <ng-container matColumnDef="customer">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Customer </th>
+        <td mat-cell *matCellDef="let loan"> {{ loan.customer }} </td>
+      </ng-container>
+      
+      <!-- Amount Column -->
+      <ng-container matColumnDef="amount">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
+        <td mat-cell *matCellDef="let loan"> ${{ loan.amount }} </td>
+      </ng-container>
+
+      <!-- Status Column -->
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+        <td mat-cell *matCellDef="let loan"> {{ loan.status }} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <!-- Pagination -->
+    <mat-paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 15, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+
+</div>

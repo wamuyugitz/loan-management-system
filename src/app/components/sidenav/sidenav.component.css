@@ -1,0 +1,113 @@
+/* Full height for sidenav */
+.sidenav-container {
+    height: 100vh;
+}
+
+/* Default sidenav width when open */
+.animated-sidenav {
+    width: 220px;
+    background: #E0F2F1;
+    /* Light greenish background */
+    transition: width 0.3s ease-in-out;
+    border-right: 1px solid #b2dfdb;
+}
+
+/* Collapsed state - keeps icons visible */
+.animated-sidenav.collapsed {
+    width: 65px;
+    /* Keeps icons visible */
+}
+
+/* Ensure main content resizes dynamically */
+mat-sidenav-content {
+    transition: margin-left 0.3s ease-in-out;
+    padding: 20px;
+}
+
+/* When the sidebar is expanded */
+.animated-sidenav:not(.collapsed)~mat-sidenav-content {
+    margin-left: 220px;
+    /* Pushes content when expanded */
+}
+
+/* When the sidebar is collapsed */
+.animated-sidenav.collapsed~mat-sidenav-content {
+    margin-left: 65px;
+    /* Moves content when sidebar collapses */
+}
+
+/* Sidenav header */
+.sidenav-header {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background: #80cbc4;
+    /* Slightly darker green */
+    color: white;
+}
+
+/* Title when expanded */
+.sidenav-title {
+    margin-left: 15px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Navigation List */
+.nav-list a {
+    display: flex;
+    align-items: center;
+    padding: 15px 15px;
+    /* Increased vertical spacing */
+    text-decoration: none;
+    color: #004d40;
+    transition: background 0.2s ease-in-out;
+    border-radius: 8px;
+}
+
+/* Hover effect */
+.nav-list a:hover {
+    background: #b2dfdb;
+    /* Light green hover effect */
+}
+
+/* Active link styling */
+.active-link {
+    background: #80cbc4 !important;
+    /* Slightly darker green */
+    color: white !important;
+    font-weight: bold;
+}
+
+/* Active link icon */
+.active-link mat-icon {
+    color: white !important;
+}
+
+/* Icon styling */
+.nav-icon {
+    margin-right: 15px;
+    color: #004d40;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Text styling */
+.nav-text {
+    font-size: 16px;
+}
+
+/* When sidenav is collapsed, only show icons */
+.animated-sidenav.collapsed .nav-list a {
+    justify-content: center;
+    padding: 15px;
+}
+
+/* Hide text when collapsed */
+.animated-sidenav.collapsed .nav-text {
+    display: none;
+}
+
+/* Adjust icon alignment when collapsed */
+.animated-sidenav.collapsed .nav-icon {
+    margin-right: 0;
+}

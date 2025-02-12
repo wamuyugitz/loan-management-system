@@ -1,0 +1,43 @@
+<div class="container vh-100 d-flex align-items-center justify-content-center">
+  <div class="row w-100 d-flex align-items-center">
+    
+    <!-- Left Column: Lottie Animation -->
+    <div class="col-lg-3 col-md-4 col-sm-12 d-flex justify-content-center align-items-center">
+      <div class="lottie-container">
+        <ng-lottie [options]="options"></ng-lottie>
+      </div>
+    </div>
+
+    <!-- Middle Column: Empty Space (Maintains Separation) -->
+    <div class="col-md-1 d-none d-md-block"></div>
+
+    <!-- Right Column: Login Form -->
+    <div class="col-lg-5 col-md-6 col-sm-12 d-flex justify-content-center">
+      <div class="card p-4 shadow-lg login-card">
+        <h3 class="text-center mb-4">Login</h3>
+        
+        <form (submit)="onLogin()">
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" id="username" class="form-control" [(ngModel)]="username" name="username" required />
+          </div>
+
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" id="password" class="form-control p-2" [(ngModel)]="password" name="password" required />
+          </div>
+
+          <button type="submit" class="btn w-100 login-btn" [routerLink]="['/dashboard']">Login</button>
+
+          <div class="text-center mt-3">
+            <small class="text-muted">
+              Don't have an account?
+              <a routerLink="/signup" class="text-primary">Sign up</a>
+            </small>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>

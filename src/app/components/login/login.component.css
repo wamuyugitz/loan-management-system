@@ -1,0 +1,109 @@
+/* Ensure Lottie Animation is responsive */
+.lottie-container {
+    width: 700px;
+    max-width: 100%;
+    min-width: 350px;
+    height: auto;
+    margin-top: 50px;
+}
+
+/* Fix the Alignment Issue */
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Increased spacing on larger screens */
+@media (min-width: 1200px) {
+    .lottie-container {
+        width: 800px;
+        margin-right: 90px;
+    }
+}
+
+/* Center the form card properly */
+.login-card {
+    width: 400px;
+    max-width: 100%;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    background: white;
+    text-align: center;
+}
+
+/* Ensure labels appear above input fields */
+label {
+    color: #333;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 5px;
+    margin-top: 10px;
+    text-align: left;
+}
+
+/* Fix input field spacing */
+.form-control {
+    border-radius: 8px;
+    padding: 14px;
+    width: 100%;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+/* Fix misaligned button */
+/* ✅ Changed default button color to the current hover color */
+.login-btn {
+    background-color: #A3E4D7 !important;
+    /* Was hover color, now default */
+    border: none;
+    font-weight: bold;
+    padding: 14px;
+    border-radius: 8px;
+    transition: 0.3s ease-in-out;
+    color: black;
+    width: 100%;
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+/* ✅ New Hover Color */
+.login-btn:hover {
+    background-color: #8CD1C9 !important;
+    /* Slightly darker teal green */
+    transform: scale(1.02);
+}
+
+/* 📌 Mobile Fix: Stack Form Below Animation */
+@media (max-width: 992px) {
+    .row {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .col-lg-3,
+    .col-lg-5 {
+        width: 100% !important;
+        display: flex;
+        justify-content: center;
+    }
+
+    .login-card {
+        max-width: 95%;
+    }
+
+    .lottie-container {
+        width: 400px;
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .lottie-container {
+        width: 350px;
+    }
+}

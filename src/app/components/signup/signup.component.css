@@ -1,0 +1,119 @@
+/* Ensure Lottie Animation Only Occupies 25% of the Screen */
+.container {
+    margin-top: 50px;
+}
+
+.lottie-container {
+    width: 400px;
+    max-width: 100%;
+    min-width: 200px;
+    height: auto;
+    margin-top: 60px;
+}
+
+/* Fix the Alignment Issue */
+.row {
+    display: flex;
+    align-items: center;
+    /* Ensures both columns are vertically centered */
+    justify-content: center;
+    /* Centers the row horizontally */
+}
+
+/* Increased spacing on larger screens */
+@media (min-width: 992px) {
+    .lottie-container {
+        margin-right: 100px;
+        /* Push animation further left */
+    }
+}
+
+/* Centering the Signup Card */
+.signup-card {
+    width: 420px;
+    /* Consistent width for better layout */
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    background: white;
+}
+
+/* Ensure First Name & Last Name are equal width */
+.row .col-md-6 {
+    padding-right: 10px;
+    /* Increased spacing between columns */
+    padding-left: 10px;
+}
+
+/* Ensures proper alignment of form labels */
+label {
+    font-weight: 500;
+    margin-bottom: 8px;
+    /* Increases space between label and input field */
+    display: block;
+    /* Ensures label is always above the input */
+}
+
+/* Input field styling */
+.form-control {
+    border-radius: 8px;
+    padding: 14px;
+    /* Increased padding for better readability */
+    width: 100%;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    box-sizing: border-box;
+    /* Ensures padding doesn’t affect width */
+}
+
+/* Increase spacing between form fields */
+.mb-3 {
+    margin-bottom: 20px !important;
+    /* Adds extra spacing between each form group */
+}
+
+/* Signup Button */
+.signup-btn {
+    background-color: #CCFFEC !important;
+    /* Custom button color */
+    border: none;
+    font-weight: bold;
+    padding: 12px;
+    border-radius: 8px;
+    transition: 0.3s ease-in-out;
+    color: #000;
+    width: 100%;
+    display: block;
+    margin-top: 20px;
+}
+
+/* Button Hover Effect */
+.signup-btn:hover {
+    background-color: #A3E4D7 !important;
+    /* Slightly darker mint green */
+    transform: scale(1.02);
+    /* Smooth zoom effect */
+}
+
+/* 💡 Mobile Fix: Stack Form Below Animation */
+@media (max-width: 768px) {
+    .row {
+        flex-direction: column;
+    }
+
+    .col-lg-4,
+    .col-lg-6 {
+        width: 100% !important;
+        display: flex;
+        justify-content: center;
+    }
+
+    .signup-card {
+        max-width: 90%;
+    }
+
+    .lottie-container {
+        width: 300px;
+        margin-top: 20px;
+    }
+}

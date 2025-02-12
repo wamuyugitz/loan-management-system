@@ -1,0 +1,52 @@
+<div class="container vh-100 d-flex align-items-center justify-content-center">
+  <div class="row w-100 d-flex align-items-center">
+    
+    <!-- Left Column: Lottie Animation -->
+    <div class="col-lg-4 col-md-5 col-sm-12 d-flex justify-content-center align-items-center">
+      <div class="lottie-container">
+        <ng-lottie [options]="options"></ng-lottie>
+      </div>
+    </div>
+
+    <!-- Right Column: Signup Form -->
+    <div class="col-lg-6 col-md-7 col-sm-12 d-flex justify-content-center">
+      <div class="card p-4 shadow-lg signup-card">
+        <h3 class="text-center mb-4">Sign Up</h3>
+        
+        <form (submit)="onSignup()">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="firstName" class="form-label">First Name</label>
+              <input type="text" id="firstName" class="form-control" [(ngModel)]="firstName" name="firstName" required />
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label for="lastName" class="form-label">Last Name</label>
+              <input type="text" id="lastName" class="form-control" [(ngModel)]="lastName" name="lastName" required />
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" id="email" class="form-control" [(ngModel)]="email" name="email" required />
+          </div>
+
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" id="password" class="form-control" [(ngModel)]="password" name="password" required />
+          </div>
+
+          <button type="submit" class="btn w-100 signup-btn">Sign Up</button>
+
+          <div class="text-center mt-3">
+            <small class="text-muted">
+              Already have an account?
+              <a routerLink="/login" class="text-primary">Login</a>
+            </small>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
