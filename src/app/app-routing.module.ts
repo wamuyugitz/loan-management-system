@@ -4,19 +4,18 @@ import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoansComponent } from './components/loans/loans.component';
-import { LoanFormComponent } from './components/loans/loan-form/loan-form.component';
-import { RepaymentScheduleComponent } from './components/loans/repayment-schedule/repayment-schedule.component';
-import { ChartsComponent } from './components/charts/charts.component';
 import { CustomersComponent } from './components/customers/customers.component';
-import { CustomerFormComponent } from './components/customers/customer-form/customer-form.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { AddCustomerComponent } from './components/add-customer/add-customer.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: '/login',
-    pathMatch: 'full',
-  },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+
+  // Login & Signup pages (No Sidenav)
+  { path: 'login', component: LoginComponent },
+  { path: 'signup', component: SignupComponent },
+
+  // Protected Routes (With Sidenav)
   {
     path: '',
     component: SidenavComponent,
@@ -26,46 +25,14 @@ const routes: Routes = [
       { path: 'loans', component: LoansComponent },
     ],
   },
-  {
-    path: 'signup',
-    component: SignupComponent,
-  },
-  {
-    path: 'login',
-    component: LoginComponent,
-  },
-  {
-    path: 'dashboard',
-    component: DashboardComponent,
-  },
-  {
-    path: 'loans',
-    component: LoansComponent,
-  },
-  {
-    path: 'loan-form',
-    component: LoanFormComponent,
-  },
-  {
-    path: 'repayment-schedule',
-    component: RepaymentScheduleComponent,
-  },
-  {
-    path: 'charts',
-    component: ChartsComponent,
-  },
-  {
-    path: 'customers',
-    component: CustomersComponent,
-  },
-  {
-    path: 'customer-form',
-    component: CustomerFormComponent,
-  },
+{
+  path:'add-customer',
+  component:AddCustomerComponent
+}
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

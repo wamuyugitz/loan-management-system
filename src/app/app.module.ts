@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Angular Material Modules
@@ -16,12 +17,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator'; 
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 
 
 import player from 'lottie-web';
-
 
 import { LoginComponent } from './components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -34,13 +34,15 @@ import { RepaymentScheduleComponent } from './components/loans/repayment-schedul
 import { ChartsComponent } from './components/charts/charts.component';
 import { CustomersComponent } from './components/customers/customers.component';
 import { CustomerFormComponent } from './components/customers/customer-form/customer-form.component';
-import { MatSelectModule } from '@angular/material/select'; // ✅ Import this
+import { MatSelectModule } from '@angular/material/select';
+import { CustomerModalComponent } from './components/customer-modal/customer-modal.component';
+import { MatDialogModule, MatDialog } from '@angular/material/dialog';
+import { AddCustomerComponent } from './components/add-customer/add-customer.component';
 
 
 export function playerFactory() {
   return player;
 }
-
 
 @NgModule({
   declarations: [
@@ -55,6 +57,8 @@ export function playerFactory() {
     ChartsComponent,
     CustomersComponent,
     CustomerFormComponent,
+    CustomerModalComponent,
+    AddCustomerComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,9 +78,11 @@ export function playerFactory() {
     MatPaginatorModule,
     MatSortModule,
     MatSelectModule,
+    MatDialogModule,
+    HttpClientModule,
     LottieModule.forRoot({ player: playerFactory }),
   ],
-  providers: [],
+  providers: [MatDialog],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

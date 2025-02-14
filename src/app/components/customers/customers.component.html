@@ -1,1 +1,176 @@
-<p>customers works!</p>
+<div class="customers-container">
+  <!-- Customer Statistics -->
+  <div class="customer-stats">
+    <mat-card class="stat-card">
+      <mat-card-title>Total Customers</mat-card-title>
+      <mat-card-content>
+        <h3>{{ dataSource.data.length }}</h3>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <mat-card-title>Active Loans</mat-card-title>
+      <mat-card-content>
+        <h3>{{ totalActiveLoans }}</h3>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <mat-card-title>Completed Loans</mat-card-title>
+      <mat-card-content>
+        <h3>{{ totalCompletedLoans }}</h3>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <mat-card-title>Total Loan Amount</mat-card-title>
+      <mat-card-content>
+        <h3>${{ totalLoanAmount }}</h3>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Table Controls -->
+  <div class="table-controls">
+    <!-- Add Customer Button -->
+    <button
+      mat-raised-button
+      class="add-customer-btn"
+      (click)="openAddCustomerModal()"
+    >
+      Add Customer
+    </button>
+
+    <!-- Sorting Dropdown -->
+    <mat-form-field appearance="outline">
+      <mat-label>Sort By</mat-label>
+      <mat-select [(value)]="sortColumn" (selectionChange)="applySorting()">
+        <mat-option value="name">Customer</mat-option>
+        <mat-option value="loanAmount">Loan Amount</mat-option>
+        <mat-option value="status">Status</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Sorting Order -->
+    <mat-form-field appearance="outline">
+      <mat-label>Order</mat-label>
+      <mat-select [(value)]="sortDirection" (selectionChange)="applySorting()">
+        <mat-option value="asc">Ascending</mat-option>
+        <mat-option value="desc">Descending</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Search Box -->
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Search Customers</mat-label>
+      <input
+        matInput
+        (keyup)="applyFilter($event)"
+        placeholder="Search by Name, Loan Amount, or Status"
+      />
+    </mat-form-field>
+  </div>
+
+  <!-- Customer Table -->
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    matSort
+    class="mat-elevation-z8 striped-table"
+  >
+    <!-- Customer ID Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Cust ID</th>
+      <td mat-cell *matCellDef="let customer">{{ customer.id }}</td>
+    </ng-container>
+
+    <!-- Customer Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Customer</th>
+      <td mat-cell *matCellDef="let customer">
+        {{ customer.firstname }} {{ customer.lastname }}
+      </td>
+    </ng-container>
+
+  <!-- Loan Amount Column -->
+<ng-container matColumnDef="loanAmount">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header> Loan Amount </th>
+  <td mat-cell *matCellDef="let customer"> 
+    {{ customer.loanAmount | number:'1.0-2' }} <!-- ✅ Formats as a number with 2 decimal places -->
+  </td>
+</ng-container>
+
+
+    <!-- Date Received Column (Mapped from "created_at" in the database) -->
+    <ng-container matColumnDef="dateReceived">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Date Received</th>
+      <td mat-cell *matCellDef="let customer">
+        <ng-container *ngIf="customer.loans?.length > 0">
+          {{ customer.loans[0].created_at | date : "yyyy-MM-dd" }}
+        </ng-container>
+        <ng-container *ngIf="!customer.loans?.length"> N/A </ng-container>
+      </td>
+    </ng-container>
+
+    <!-- Due Date Column (Mapped from "dueDate" in the database) -->
+    <ng-container matColumnDef="dueDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Due Date</th>
+      <td mat-cell *matCellDef="let customer">
+        <ng-container *ngIf="customer.loans?.length > 0">
+          {{ customer.loans[0].dueDate | date : "yyyy-MM-dd" }}
+        </ng-container>
+        <ng-container *ngIf="!customer.loans?.length"> N/A </ng-container>
+      </td>
+    </ng-container>
+
+    <!-- Status Column (Mapped from "status" in the database with correct values) -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+      <td mat-cell *matCellDef="let customer">
+        <ng-container *ngIf="customer.loans?.length > 0">
+          <span
+            [ngClass]="{
+              'pending-loan': customer.loans[0].status === 'PENDING',
+              'approved-loan': customer.loans[0].status === 'APPROVED',
+              'rejected-loan': customer.loans[0].status === 'REJECTED',
+              'disbursed-loan': customer.loans[0].status === 'DISBURSED',
+              'repayment-loan': customer.loans[0].status === 'IN_REPAYMENT',
+              'paid-loan': customer.loans[0].status === 'PAID',
+              'defaulted-loan': customer.loans[0].status === 'DEFAULTED'
+            }"
+          >
+            {{ customer.loans[0].status }}
+          </span>
+        </ng-container>
+        <ng-container *ngIf="!customer.loans?.length"> No Loan </ng-container>
+      </td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let customer">
+        <button
+          mat-button
+          color="primary"
+          (click)="openCustomerModal(customer)"
+        >
+          View More
+        </button>
+        <button mat-button color="warn" (click)="deleteCustomer(customer)">
+          Delete
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <!-- Pagination -->
+  <mat-paginator
+    [pageSize]="pageSize"
+    [pageSizeOptions]="[5, 10, 15, 20]"
+    showFirstLastButtons
+  ></mat-paginator>
+</div>

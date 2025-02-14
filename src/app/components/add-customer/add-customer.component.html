@@ -1,0 +1,62 @@
+<div class="add-customer-container">
+  <h2 class="form-title">Add New Customer</h2>
+
+  <form #customerForm="ngForm">
+    <!-- First Name -->
+    <mat-form-field appearance="outline">
+      <mat-label>First Name</mat-label>
+      <input matInput type="text" [(ngModel)]="customer.firstname" name="firstname" required>
+    </mat-form-field>
+
+    <!-- Last Name -->
+    <mat-form-field appearance="outline">
+      <mat-label>Last Name</mat-label>
+      <input matInput type="text" [(ngModel)]="customer.lastname" name="lastname" required>
+    </mat-form-field>
+
+    <!-- Phone Number -->
+    <mat-form-field appearance="outline">
+      <mat-label>Phone Number</mat-label>
+      <input matInput type="tel" [(ngModel)]="customer.phoneNumber" name="phoneNumber" required>
+    </mat-form-field>
+
+    <!-- National ID -->
+    <mat-form-field appearance="outline">
+      <mat-label>National ID</mat-label>
+      <input matInput type="text" [(ngModel)]="customer.nationalIdentityCard" name="nationalIdentityCard" required>
+    </mat-form-field>
+
+    <!-- Toggle to Attach Loan -->
+    <mat-slide-toggle [(ngModel)]="attachLoan" name="attachLoan">Attach Loan?</mat-slide-toggle>
+
+    <!-- Loan Fields -->
+    <div *ngIf="attachLoan">
+      <h3 class="section-title">Loan Details</h3>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Principal Amount</mat-label>
+        <input matInput type="number" [(ngModel)]="loan.principalAmount" name="principalAmount" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Repayment Frequency</mat-label>
+        <mat-select [(ngModel)]="loan.repaymentFrequency" name="repaymentFrequency" required>
+          <mat-option value="WEEKS">Weekly</mat-option>
+          <mat-option value="MONTHS">Monthly</mat-option>
+          <mat-option value="YEARS">Yearly</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Loan Status</mat-label>
+        <mat-select [(ngModel)]="loan.status" name="status" required>
+          <mat-option value="ACTIVE">Active</mat-option>
+          <mat-option value="PAID">Paid</mat-option>
+          <mat-option value="DEFAULTED">Defaulted</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <button mat-raised-button type="submit" (click)="onSubmit(customerForm)">Submit</button>
+  </form>
+</div>

@@ -1,0 +1,44 @@
+/* Main Container */
+.add-customer-container {
+    padding: 20px;
+    width: 100%;
+    max-width: 500px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+/* Form Fields */
+mat-form-field {
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+/* Buttons */
+.submit-btn {
+    background-color: #80CBC4 !important;
+    color: black !important;
+    font-weight: bold;
+    padding: 10px 16px;
+    border-radius: 8px;
+}
+
+.submit-btn:hover {
+    background-color: #4DB6AC !important;
+    transform: scale(1.05);
+}
+
+.cancel-btn {
+    background-color: #E57373 !important;
+    color: white !important;
+    font-weight: bold;
+    padding: 10px 16px;
+    border-radius: 8px;
+    margin-left: 10px;
+}
+
+.cancel-btn:hover {
+    background-color: #D32F2F !important;
+    transform: scale(1.05);
+}

@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://172.16.11.105:8080';
+  private apiUrl = 'http://172.16.8.24:8080/';
   private signupUrl = `${this.apiUrl}/auth/register`;
   private loginUrl = `${this.apiUrl}/auth/login`;
 
