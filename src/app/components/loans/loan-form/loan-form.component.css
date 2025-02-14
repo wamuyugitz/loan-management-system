@@ -1,0 +1,41 @@
+.loan-form-container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    margin: auto;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.search-field {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.search-results {
+    max-height: 150px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f3f3f3;
+}
+
+.selected-customer {
+    margin-bottom: 15px;
+    color: #007bff;
+    font-weight: bold;
+}
+
+mat-form-field {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}

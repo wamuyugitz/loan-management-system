@@ -19,6 +19,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 import player from 'lottie-web';
@@ -80,6 +82,8 @@ export function playerFactory() {
     MatSelectModule,
     MatDialogModule,
     HttpClientModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     LottieModule.forRoot({ player: playerFactory }),
   ],
   providers: [MatDialog],

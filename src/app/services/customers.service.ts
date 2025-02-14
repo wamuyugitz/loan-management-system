@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class CustomerService {
-  private apiUrl = 'http://172.16.8.24:8080/customers'; 
+  private apiUrl = 'http://172.16.8.24:8080/customers';
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -15,22 +15,26 @@ export class CustomerService {
 
   constructor(private http: HttpClient) {}
 
-  // ✅ Fetch All Customers from API
+  //Fetch All Customers from API
   getCustomers(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
   }
 
-  // ✅ Fetch a Single Customer by ID
+  //Fetch a Single Customer by ID
   getCustomerById(customerId: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${customerId}`);
   }
 
-  // ✅ Add a New Customer (with or without a loan)
+  //Add a New Customer (with or without a loan)
   addCustomer(customerData: any): Observable<any> {
     return this.http.post(this.apiUrl, customerData, this.httpOptions);
   }
 
-  // ✅ Update Customer Information
+  getCustomersWithoutLoans(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/no-loans`);
+  }
+
+  //Update Customer Information
   updateCustomer(customerId: number, updatedData: any): Observable<any> {
     return this.http.put(
       `${this.apiUrl}/${customerId}`,
@@ -39,7 +43,7 @@ export class CustomerService {
     );
   }
 
-  // ✅ Delete Customer
+  //Delete Customer
   deleteCustomer(customerId: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${customerId}`, this.httpOptions);
   }

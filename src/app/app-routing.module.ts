@@ -7,6 +7,7 @@ import { LoansComponent } from './components/loans/loans.component';
 import { CustomersComponent } from './components/customers/customers.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { AddCustomerComponent } from './components/add-customer/add-customer.component';
+import { LoanFormComponent } from './components/loans/loan-form/loan-form.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -28,6 +29,10 @@ const routes: Routes = [
 {
   path:'add-customer',
   component:AddCustomerComponent
+},
+{
+  path:'loan-form',
+  component:LoanFormComponent
 }
 ];
 

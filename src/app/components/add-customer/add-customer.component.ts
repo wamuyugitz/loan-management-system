@@ -11,7 +11,14 @@ import { CustomerService } from '../../services/customers.service';
 export class AddCustomerComponent {
   customer: any = {};
   attachLoan: boolean = false;
-  loan: any = {};
+  loan: any = {
+    interestRate: null,
+    dueDate: null,
+    frequency: null,
+    status: null,
+    repaymentPeriod: null,
+    principalAmount: null,
+  };
 
   constructor(
     private customersService: CustomerService,
@@ -32,27 +39,31 @@ export class AddCustomerComponent {
       loans: this.attachLoan
         ? [
             {
-              principalAmount: this.loan.principalAmount,
               interestRate: this.loan.interestRate,
-              repaymentPeriod: this.loan.repaymentPeriod,
               dueDate: this.loan.dueDate,
-              repaymentFrequency: this.loan.repaymentFrequency,
+              frequency: this.loan.frequency,
               status: this.loan.status,
+              repaymentPeriod: this.loan.repaymentPeriod,
+              principalAmount: this.loan.principalAmount,
             },
           ]
         : [],
     };
 
     this.customersService.addCustomer(customerData).subscribe(
-      (response:any) => {
+      () => {
         alert('Customer added successfully!');
         this.dialogRef.close(true);
       },
-      (error:any) => {
+      (error) => {
         alert('Error adding customer!');
         console.error(error);
       }
     );
+  }
+
+  toggleAttachLoan() {
+    this.attachLoan = !this.attachLoan;
   }
 
   onCancel() {

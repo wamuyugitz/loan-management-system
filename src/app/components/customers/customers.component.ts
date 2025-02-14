@@ -19,13 +19,10 @@ interface Customer {
 }
 
 interface Loan {
-  id: number;
   principalAmount: number;
-  interestRate: number;
   dueDate: string;
-  repaymentPeriod: number;
-  frequency: string;
   status: string;
+  created_at: string;
 }
 
 @Component({
@@ -38,7 +35,7 @@ export class CustomersComponent implements OnInit, AfterViewInit {
     'id',
     'name',
     'loanAmount',
-    'dateReceived', //Changed from 'created_at' to match template
+    'dateReceived',
     'dueDate',
     'status',
     'actions',
@@ -72,53 +69,41 @@ export class CustomersComponent implements OnInit, AfterViewInit {
     });
   }
 
+  // Fetch Customers with Correct Loan Mapping
   fetchCustomers() {
     this.customerService.getCustomers().subscribe((customers) => {
-      this.dataSource.data = customers.map((customer) => {
-        const firstLoan =
-          customer.loans && customer.loans.length > 0
-            ? customer.loans[0]
-            : null;
-
-        return {
-          ...customer,
-          loanAmount:
-            firstLoan && firstLoan.principalAmount !== null
-              ? Number(firstLoan.principalAmount)
-              : 0,
-          dateReceived:
-            firstLoan && firstLoan.created_at ? firstLoan.created_at : 'N/A',
-          dueDate: firstLoan && firstLoan.dueDate ? firstLoan.dueDate : 'N/A',
-          status: firstLoan && firstLoan.status ? firstLoan.status : 'No Loan',
-        };
-      });
-
-      console.log('Mapped Customers:', this.dataSource.data); //Verify final mapped data
+      this.dataSource.data = customers.map((customer) => ({
+        ...customer,
+        loanAmount: customer.loans?.[0]?.principalAmount ?? 0,
+        dateReceived: customer.loans?.[0]?.created_at ?? 'N/A',
+        dueDate: customer.loans?.[0]?.dueDate ?? 'N/A',
+        status: customer.loans?.[0]?.status ?? 'No Loan',
+      }));
     });
   }
 
-  //Get total active loans count
+  // Calculate Total Active Loans
   get totalActiveLoans(): number {
     return this.dataSource.data
-      .flatMap((customer) => customer.loans || [])
-      .filter((loan) => loan.status === 'PENDING').length;
+      .flatMap((c) => c.loans || [])
+      .filter((l) => l.status === 'PENDING').length;
   }
 
-  //Get total completed loans count
+  // Calculate Total Completed Loans
   get totalCompletedLoans(): number {
     return this.dataSource.data
-      .flatMap((customer) => customer.loans || [])
-      .filter((loan) => loan.status === 'PAID').length;
+      .flatMap((c) => c.loans || [])
+      .filter((l) => l.status === 'PAID').length;
   }
 
-  //Get total loan amount
+  // Calculate Total Loan Amount
   get totalLoanAmount(): number {
     return this.dataSource.data
-      .flatMap((customer) => customer.loans || [])
-      .reduce((acc, loan) => acc + (loan.principalAmount || 0), 0);
+      .flatMap((c) => c.loans || [])
+      .reduce((sum, l) => sum + (l.principalAmount || 0), 0);
   }
 
-  //Filtering function
+  // Apply Table Filter
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value
       .trim()
@@ -126,7 +111,7 @@ export class CustomersComponent implements OnInit, AfterViewInit {
     this.dataSource.filter = filterValue;
   }
 
-  //Sorting function
+  // Apply Sorting
   applySorting() {
     if (this.sort) {
       this.sort.active = this.sortColumn;
@@ -135,14 +120,27 @@ export class CustomersComponent implements OnInit, AfterViewInit {
     }
   }
 
-  //Open Add Customer Modal
-  openAddCustomerModal() {
-    this.dialog.open(AddCustomerComponent, {
-      width: '500px',
-    });
+ 
+  getStatusClass(status: string): string {
+    const statusClassMap: { [key: string]: string } = {
+      PENDING: 'pending-loan',
+      APPROVED: 'approved-loan',
+      REJECTED: 'rejected-loan',
+      DISBURSED: 'disbursed-loan',
+      IN_REPAYMENT: 'in_repayment-loan',
+      PAID: 'paid-loan',
+      DEFAULTED: 'defaulted-loan',
+    };
+
+    return statusClassMap[status] || 'unknown-loan';
   }
 
-  //Open View More Modal
+  // Open Add Customer Modal
+  openAddCustomerModal() {
+    this.dialog.open(AddCustomerComponent, { width: '500px' });
+  }
+
+  // Open Customer Modal
   openCustomerModal(customer: Customer) {
     this.dialog.open(CustomerModalComponent, {
       width: '500px',
@@ -150,12 +148,12 @@ export class CustomersComponent implements OnInit, AfterViewInit {
     });
   }
 
-  //Delete customer from table
+  // Delete Customer
   deleteCustomer(customer: Customer) {
     const index = this.dataSource.data.findIndex((c) => c.id === customer.id);
     if (index !== -1) {
       this.dataSource.data.splice(index, 1);
-      this.dataSource._updateChangeSubscription(); // Refresh table
+      this.dataSource._updateChangeSubscription();
     }
   }
 }
