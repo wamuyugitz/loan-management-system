@@ -48,7 +48,7 @@
     <!-- Principal Amount -->
     <ng-container matColumnDef="principalAmount">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Principal Amount</th>
-      <td mat-cell *matCellDef="let loan">{{ loan.principal_amount | currency }}</td>
+      <td mat-cell *matCellDef="let loan">{{ loan.principalAmount | currency }}</td>
     </ng-container>
 
     <!-- Interest Rate -->
@@ -61,12 +61,6 @@
     <ng-container matColumnDef="dueDate">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Due Date</th>
       <td mat-cell *matCellDef="let loan">{{ loan.duedate | date }}</td>
-    </ng-container>
-
-    <!-- Frequency -->
-    <ng-container matColumnDef="frequency">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Frequency</th>
-      <td mat-cell *matCellDef="let loan">{{ loan.frequency }}</td>
     </ng-container>
 
     <!-- Status -->

@@ -26,7 +26,7 @@ export class LoanService {
   // Add a new loan
   addLoan(loanData: any): Observable<any> {
     console.log('Sending loan data:', loanData);
-    return this.http.post(LOANS_API, loanData, this.httpOptions);
+    return this.http.post<any[]>(LOANS_API, loanData, this.httpOptions);
   }
 
   // Delete a loan
@@ -39,7 +39,7 @@ export class LoanService {
     return this.http
       .get<any[]>(CUSTOMERS_API, this.httpOptions)
       .pipe(
-        map((customers) =>
+        map((customers: any[]) =>
           customers.filter(
             (customer: { loans: any[] }) =>
               !customer.loans.length ||

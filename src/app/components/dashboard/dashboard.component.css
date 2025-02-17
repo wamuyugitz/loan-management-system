@@ -36,52 +36,6 @@
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* Table Controls (White Row Above Table) */
-.table-controls {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: white;
-    padding: 10px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-/* Style for table search input */
-.search-field {
-    width: 250px;
-}
-
-/* Table Styles */
-.striped-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-}
-
-/* Table Header */
-.striped-table th {
-    background-color: #80cbc4;
-    color: white;
-    padding: 12px;
-    text-align: left;
-}
-
-/* Alternate row colors */
-.striped-table tr:nth-child(even) {
-    background-color: #E0F2F1;
-}
-
-.striped-table tr:nth-child(odd) {
-    background-color: white;
-}
-
-/* Table Cells */
-.striped-table td {
-    padding: 12px;
-    border-bottom: 1px solid #b2dfdb;
-}
 
 /* Responsive Layout */
 @media (max-width: 768px) {
@@ -92,10 +46,5 @@
 
     .stat-card {
         width: 100%;
-    }
-
-    .table-controls {
-        flex-direction: column;
-        gap: 10px;
     }
 }

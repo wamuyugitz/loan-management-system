@@ -1,83 +1,84 @@
-    <div class="modal-content">
-    <h3>Add New Loan</h3>
-    <form (ngSubmit)="submitLoan()" #loanForm="ngForm">
-      <!-- Customer Selection -->
-      <div class="form-group">
-        <label for="customerId">Customer</label>
-        <select
-          id="customerId"
-          [(ngModel)]="loanData.customerId"
-          name="customerId"
-          class="form-control"
-          required
+<div class="loan-form-container">
+  <h3 class="form-title">Add New Loan</h3>
+  <form (ngSubmit)="submitLoan()" #loanForm="ngForm">
+    <!-- Customer Selection -->
+    <div class="form-group">
+      <label for="customerId">Customer</label>
+      <select
+        id="customerId"
+        [(ngModel)]="loanData.customerId"
+        name="customerId"
+        class="form-control"
+        required
+      >
+        <option
+          *ngFor="let customer of eligibleCustomers"
+          [value]="customer.id"
         >
-          <option *ngFor="let customer of eligibleCustomers" [value]="customer.id">
-            {{ customer.firstname }} {{ customer.lastname }} ({{ customer.nationalid }})
-          </option>
-        </select>
-      </div>
+          {{ customer.firstname }} {{ customer.lastname }}
+        </option>
+      </select>
+    </div>
 
-      <!-- Principal Amount -->
-      <div class="form-group">
-        <label for="principalAmount">Principal Amount</label>
-        <input
-          type="number"
-          id="principalAmount"
-          [(ngModel)]="loanData.principalAmount"
-          name="principalAmount"
-          class="form-control"
-          required
-          min="1"
-        />
-      </div>
+    <!-- Principal Amount -->
+    <div class="form-group">
+      <label for="principalAmount">Principal Amount</label>
+      <input
+        type="number"
+        id="principalAmount"
+        [(ngModel)]="loanData.principalAmount"
+        name="principalAmount"
+        class="form-control"
+        required
+        min="1"
+      />
+    </div>
 
-      <!-- Interest Rate -->
-      <div class="form-group">
-        <label for="interestRate">Interest Rate (%)</label>
-        <input
-          type="number"
-          id="interestRate"
-          [(ngModel)]="loanData.interestRate"
-          name="interestRate"
-          class="form-control"
-          required
-          min="0"
-          step="0.01"
-        />
-      </div>
+    <!-- Interest Rate -->
+    <div class="form-group">
+      <label for="interestRate">Interest Rate (%)</label>
+      <input
+        type="number"
+        id="interestRate"
+        [(ngModel)]="loanData.interestRate"
+        name="interestRate"
+        class="form-control"
+        required
+        min="0"
+        step="0.01"
+      />
+    </div>
 
-      <!-- Repayment Period -->
-      <div class="form-group">
-        <label for="repaymentPeriod">Repayment Period (months)</label>
-        <input
-          type="number"
-          id="repaymentPeriod"
-          [(ngModel)]="loanData.repaymentPeriod"
-          name="repaymentPeriod"
-          class="form-control"
-          required
-          min="1"
-        />
-      </div>
+    <!-- Repayment Period -->
+    <div class="form-group">
+      <label for="repaymentPeriod">Repayment Period (years)</label>
+      <input
+        type="number"
+        id="repaymentPeriod"
+        [(ngModel)]="loanData.repaymentPeriod"
+        name="repaymentPeriod"
+        class="form-control"
+        required
+        min="1"
+      />
+    </div>
 
-      <!-- Frequency -->
-      <div class="form-group">
-        <label for="frequency">Repayment Frequency</label>
-        <select
-          id="frequency"
-          [(ngModel)]="loanData.frequency"
-          name="frequency"
-          class="form-control"
-          required
-        >
-          <option value="Weekly">Weekly</option>
-          <option value="Monthly">Monthly</option>
-          <option value="Yearly">Yearly</option>
-        </select>
-      </div>
+    <!-- Due Date -->
+    <div class="form-group">
+      <label for="duedate">Due Date</label>
+      <input
+        type="date"
+        id="duedate"
+        [(ngModel)]="loanData.duedate"
+        name="duedate"
+        class="form-control"
+        required
+      />
+    </div>
 
+    <div class="form-row">
       <!-- Status -->
-      <div class="form-group">
+      <div class="form-group half-width">
         <label for="status">Loan Status</label>
         <select
           id="status"
@@ -95,13 +96,20 @@
           <option value="REJECTED">Rejected</option>
         </select>
       </div>
-
-      <!-- Action Buttons -->
-      <div class="form-actions">
-        <button type="submit" class="btn btn-primary" [disabled]="loanForm.invalid">Submit</button>
-        <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancel</button>
-      </div>
-    </form>
     </div>
-  
 
+    <!-- Action Buttons -->
+    <div class="form-actions">
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="loanForm.invalid"
+      >
+        Submit
+      </button>
+      <button type="button" class="btn btn-secondary" (click)="onCancel()">
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>

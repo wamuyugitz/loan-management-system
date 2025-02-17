@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog'; // Import MatDialog
 import { LoanService } from 'src/app/services/loan.service';
 import { LoanFormComponent } from './loan-form/loan-form.component';
-
 
 @Component({
   selector: 'app-loans',
@@ -16,7 +15,6 @@ export class LoansComponent implements OnInit {
     'principalAmount',
     'interestRate',
     'dueDate',
-    'frequency',
     'status',
     'actions',
   ];
@@ -26,7 +24,10 @@ export class LoansComponent implements OnInit {
   averageInterest = 0;
   loansInRepayment = 0;
 
-  constructor(private loanService: LoanService, private dialog: MatDialog) {}
+  constructor(
+    private loanService: LoanService,
+    private dialog: MatDialog // Use MatDialog here
+  ) {}
 
   ngOnInit(): void {
     this.fetchLoans();
@@ -37,7 +38,7 @@ export class LoansComponent implements OnInit {
       this.dataSource.data = loans;
       this.totalLoans = loans.length;
       this.totalPrincipal = loans.reduce(
-        (acc: number, loan: any) => acc + loan.principal_amount,
+        (acc: number, loan: any) => acc + loan.principalAmount,
         0
       );
       this.averageInterest = loans.length
