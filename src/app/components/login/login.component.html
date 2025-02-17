@@ -27,7 +27,7 @@
             <input type="password" id="password" class="form-control p-2" [(ngModel)]="password" name="password" required />
           </div>
 
-          <button type="submit" class="btn w-100 login-btn" [routerLink]="['/dashboard']">Login</button>
+          <button type="submit" class="btn w-100 login-btn" (click)="onLogin()">Login</button>
 
           <div class="text-center mt-3">
             <small class="text-muted">

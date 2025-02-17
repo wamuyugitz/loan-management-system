@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class CustomerService {
-  private apiUrl = 'http://172.16.8.24:8080/customers';
+  private apiUrl = 'http://172.16.8.12:8000/customers';
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',

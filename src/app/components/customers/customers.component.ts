@@ -13,14 +13,14 @@ interface Customer {
   lastname: string;
   nationalid: string;
   phonenumber: string;
-  created_at: string;
+  startdate: string;
   updated_at: string;
   loans: Loan[];
 }
 
 interface Loan {
-  principalAmount: number;
-  dueDate: string;
+  principal_amount: number;
+  duedate: string;
   status: string;
   created_at: string;
 }
@@ -74,9 +74,9 @@ export class CustomersComponent implements OnInit, AfterViewInit {
     this.customerService.getCustomers().subscribe((customers) => {
       this.dataSource.data = customers.map((customer) => ({
         ...customer,
-        loanAmount: customer.loans?.[0]?.principalAmount ?? 0,
-        dateReceived: customer.loans?.[0]?.created_at ?? 'N/A',
-        dueDate: customer.loans?.[0]?.dueDate ?? 'N/A',
+        loanAmount: customer.loans?.[0]?.principal_amount ?? 0,
+        dateReceived: customer.loans?.[0]?.startdate ?? 'N/A',
+        dueDate: customer.loans?.[0]?.duedate ?? 'N/A',
         status: customer.loans?.[0]?.status ?? 'No Loan',
       }));
     });
@@ -100,7 +100,7 @@ export class CustomersComponent implements OnInit, AfterViewInit {
   get totalLoanAmount(): number {
     return this.dataSource.data
       .flatMap((c) => c.loans || [])
-      .reduce((sum, l) => sum + (l.principalAmount || 0), 0);
+      .reduce((sum, l) => sum + (l.principal_amount || 0), 0);
   }
 
   // Apply Table Filter

@@ -1,22 +1,31 @@
 <div class="customers-container">
   <!-- Customer Statistics -->
   <div class="customer-stats">
-    <mat-card class="stat-card" *ngFor="let stat of [
-      { title: 'Total Customers', value: dataSource.data.length },
-      { title: 'Active Loans', value: totalActiveLoans },
-      { title: 'Completed Loans', value: totalCompletedLoans },
-      { title: 'Total Loan Amount', value: totalLoanAmount }
-    ]">
+    <mat-card
+      class="stat-card"
+      *ngFor="
+        let stat of [
+          { title: 'Total Customers', value: dataSource.data.length },
+          { title: 'Active Loans', value: totalActiveLoans },
+          { title: 'Completed Loans', value: totalCompletedLoans },
+          { title: 'Total Loan Amount', value: totalLoanAmount }
+        ]
+      "
+    >
       <mat-card-title>{{ stat.title }}</mat-card-title>
       <mat-card-content>
-        <h3>{{ stat.value | number:'1.0-2' }}</h3>
+        <h3>{{ stat.value | number : "1.0-2" }}</h3>
       </mat-card-content>
     </mat-card>
   </div>
 
   <!-- Table Controls -->
   <div class="table-controls">
-    <button mat-raised-button class="add-customer-btn" (click)="openAddCustomerModal()">
+    <button
+      mat-raised-button
+      class="add-customer-btn"
+      (click)="openAddCustomerModal()"
+    >
       Add Customer
     </button>
 
@@ -42,12 +51,21 @@
     <!-- Search Box -->
     <mat-form-field appearance="outline" class="search-field">
       <mat-label>Search Customers</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="Search by Name, Loan Amount, or Status" />
+      <input
+        matInput
+        (keyup)="applyFilter($event)"
+        placeholder="Search by Name, Loan Amount, or Status"
+      />
     </mat-form-field>
   </div>
 
   <!-- Customer Table -->
-  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 striped-table">
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    matSort
+    class="mat-elevation-z8 striped-table"
+  >
     <!-- Customer ID -->
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Cust ID</th>
@@ -66,7 +84,7 @@
     <ng-container matColumnDef="loanAmount">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Loan Amount</th>
       <td mat-cell *matCellDef="let customer">
-        {{ customer.loanAmount | number:'1.0-2' }}
+        {{ customer.loanAmount | number : "1.0-2" }}
       </td>
     </ng-container>
 
@@ -74,7 +92,10 @@
     <ng-container matColumnDef="dateReceived">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Date Received</th>
       <td mat-cell *matCellDef="let customer">
-        {{ customer.dateReceived | date:'yyyy-MM-dd' }}
+        <ng-container *ngIf="customer.loans?.length > 0">
+          {{ customer.loans[0].startdate | date : "yyyy-MM-dd" }}
+        </ng-container>
+        <ng-container *ngIf="!customer.loans?.length"> N/A </ng-container>
       </td>
     </ng-container>
 
@@ -82,7 +103,10 @@
     <ng-container matColumnDef="dueDate">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Due Date</th>
       <td mat-cell *matCellDef="let customer">
-        {{ customer.dueDate | date:'yyyy-MM-dd' }}
+        <ng-container *ngIf="customer.loans?.length > 0">
+          {{ customer.loans[0].duedate | date : "yyyy-MM-dd" }}
+        </ng-container>
+        <ng-container *ngIf="!customer.loans?.length"> N/A </ng-container>
       </td>
     </ng-container>
 
@@ -100,7 +124,11 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef>Actions</th>
       <td mat-cell *matCellDef="let customer">
-        <button mat-button color="primary" (click)="openCustomerModal(customer)">
+        <button
+          mat-button
+          color="primary"
+          (click)="openCustomerModal(customer)"
+        >
           View More
         </button>
         <button mat-button color="warn" (click)="deleteCustomer(customer)">
@@ -114,5 +142,9 @@
   </table>
 
   <!-- Pagination -->
-  <mat-paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 15, 20]" showFirstLastButtons></mat-paginator>
+  <mat-paginator
+    [pageSize]="pageSize"
+    [pageSizeOptions]="[5, 10, 15, 20]"
+    showFirstLastButtons
+  ></mat-paginator>
 </div>

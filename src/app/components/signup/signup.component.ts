@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import { AnimationOptions } from 'ngx-lottie';
 
 @Component({
@@ -21,7 +22,7 @@ export class SignupComponent {
   password: string = '';
   confirmPassword: string = '';
 
-  constructor(private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   onSignup() {
     if (
@@ -48,6 +49,18 @@ export class SignupComponent {
       username: this.username,
       password: this.password,
     };
+
+    this.authService.signup(userData).subscribe(
+      (response: any) => {
+        console.log('Signup successful', response);
+        alert('Account Created!');
+        this.router.navigate(['/login']); // Redirect to login after signup
+      },
+      (error: any) => {
+        console.error('Signup failed', error);
+        alert('Signup failed, try again.');
+      }
+    );
 
     console.log(
       'User signed up with:',

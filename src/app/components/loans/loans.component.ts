@@ -37,7 +37,7 @@ export class LoansComponent implements OnInit {
       this.dataSource.data = loans;
       this.totalLoans = loans.length;
       this.totalPrincipal = loans.reduce(
-        (acc: number, loan: any) => acc + loan.principalAmount,
+        (acc: number, loan: any) => acc + loan.principal_amount,
         0
       );
       this.averageInterest = loans.length

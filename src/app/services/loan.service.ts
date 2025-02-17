@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
-const API_BASE_URL = 'http://172.16.8.24:8080';
+const API_BASE_URL = 'http://172.16.8.12:8000';
 const LOANS_API = `${API_BASE_URL}/loans`;
 const CUSTOMERS_API = `${API_BASE_URL}/customers`;
 
