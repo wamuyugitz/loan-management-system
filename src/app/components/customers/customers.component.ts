@@ -120,7 +120,6 @@ export class CustomersComponent implements OnInit, AfterViewInit {
     }
   }
 
- 
   getStatusClass(status: string): string {
     const statusClassMap: { [key: string]: string } = {
       PENDING: 'pending-loan',
@@ -141,11 +140,18 @@ export class CustomersComponent implements OnInit, AfterViewInit {
   }
 
   // Open Customer Modal
-  openCustomerModal(customer: Customer) {
-    this.dialog.open(CustomerModalComponent, {
-      width: '500px',
-      data: customer,
-    });
+  openCustomerModal(customer: any) {
+    this.customerService.getCustomerById(customer.id).subscribe(
+      (customerData) => {
+        this.dialog.open(CustomerModalComponent, {
+          width: '600px',
+          data: customerData, // Pass the fetched customer data to the modal.
+        });
+      },
+      (error) => {
+        console.error('Failed to fetch customer data:', error);
+      }
+    );
   }
 
   // Delete Customer

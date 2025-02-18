@@ -1,37 +1,37 @@
 <div class="dashboard-container">
-  
   <!-- Dashboard Title -->
   <h2 class="dashboard-title">Dashboard Overview</h2>
 
   <!-- Quick Statistics Cards -->
   <div class="dashboard-cards">
     <mat-card class="stat-card">
-      <mat-card-title>Total Customers</mat-card-title>
+      <mat-card-title>Total Disbursed</mat-card-title>
       <mat-card-content>
-        <h3>1,234</h3>
+        <h3>{{ statistics.totalDisbursed | number }}</h3>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <mat-card-title>Total Paid</mat-card-title>
+      <mat-card-content>
+        <h3>{{ statistics.totalPaid | number }}</h3>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <mat-card-title>Outstanding Balance</mat-card-title>
+      <mat-card-content>
+        <h3>{{ statistics.outstandingBalance | number }}</h3>
       </mat-card-content>
     </mat-card>
 
     <mat-card class="stat-card">
       <mat-card-title>Active Loans</mat-card-title>
       <mat-card-content>
-        <h3>567</h3>
+        <h3>{{ statistics.activeLoans | number }}</h3>
       </mat-card-content>
     </mat-card>
 
-    <mat-card class="stat-card">
-      <mat-card-title>Paid Loans</mat-card-title>
-      <mat-card-content>
-        <h3>789</h3>
-      </mat-card-content>
-    </mat-card>
-
-    <mat-card class="stat-card">
-      <mat-card-title>Pending Loans</mat-card-title>
-      <mat-card-content>
-        <h3>98</h3>
-      </mat-card-content>
-    </mat-card>
   </div>
 
   <!-- Loan Analytics Charts Section -->
@@ -39,6 +39,4 @@
     <h3>Loan Analytics</h3>
     <app-charts></app-charts>
   </div>
-  
-
 </div>

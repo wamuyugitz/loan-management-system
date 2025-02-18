@@ -1,0 +1,11 @@
+.charts-container {
+    display: flex;
+    gap: 20px;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.chart-box {
+    width: 45%;
+    min-height: 300px;
+}

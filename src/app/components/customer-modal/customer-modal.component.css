@@ -1,0 +1,73 @@
+.modal-container {
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.modal-title {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+    border-bottom: 2px solid #1976d2;
+    padding-bottom: 10px;
+}
+
+.modal-form .form-group {
+    margin-bottom: 15px;
+}
+
+.modal-form label {
+    font-weight: 500;
+    color: #555;
+}
+
+.modal-form input, .modal-form select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 5px;
+    transition: border-color 0.3s;
+}
+
+.modal-form input:focus, .modal-form select:focus {
+    border-color: #1976d2;
+    outline: none;
+}
+
+.loan-section {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f3f7fc;
+}
+
+.button-group {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+button {
+    min-width: 100px;
+}
+
+.success-snackbar {
+    background-color: #4caf50 !important;
+    color: white;
+    font-weight: 500;
+}
+
+.error-snackbar {
+    background-color: #f44336 !important;
+    color: white;
+    font-weight: 500;
+}
+
+.custom-modal-container .mat-dialog-container {
+    z-index: 1050;
+}

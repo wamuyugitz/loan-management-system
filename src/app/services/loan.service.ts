@@ -5,6 +5,7 @@ import { Observable, map } from 'rxjs';
 const API_BASE_URL = 'http://172.16.8.12:8000';
 const LOANS_API = `${API_BASE_URL}/loans`;
 const CUSTOMERS_API = `${API_BASE_URL}/customers`;
+const STATISTICS_API = `${API_BASE_URL}/loans/statistics`;
 
 @Injectable({
   providedIn: 'root',
@@ -34,6 +35,15 @@ export class LoanService {
     return this.http.delete(`${LOANS_API}/${loanId}`, this.httpOptions);
   }
 
+  // Update an existing loan
+  updateLoan(loanId: number, updatedLoan: any): Observable<any> {
+    return this.http.put(
+      `${LOANS_API}/${loanId}`,
+      updatedLoan,
+      this.httpOptions
+    );
+  }
+
   // Get eligible customers
   getEligibleCustomers(): Observable<any[]> {
     return this.http
@@ -47,5 +57,9 @@ export class LoanService {
           )
         )
       );
+  }
+
+  getLoanStatistics(): Observable<any> {
+    return this.http.get<any>(STATISTICS_API, this.httpOptions);
   }
 }
